@@ -21,7 +21,7 @@ export function TaskList() {
     }
 
     const task = {
-      id: Math.random(),
+      id: tasks.length + 1,
       title: newTaskTitle,
       isComplete: false
     }
@@ -32,16 +32,20 @@ export function TaskList() {
 
   function handleToggleTaskCompletion(id: number) {
     // Altere entre `true` ou `false` o campo `isComplete` de uma task com dado ID
-    // tasks.map(task => {
-    //   if (task.id == id) {
-    //     task.isComplete = true;
-    //     setTasks([task])
-    //   }
-    // })
+    const newTasks = tasks.map(task => task.id === id ? {
+      ...task,
+      isComplete: !task.isComplete
+    } : task)
+
+    setTasks(newTasks);
   }
 
   function handleRemoveTask(id: number) {
     // Remova uma task da listagem pelo ID
+
+    const filteredTasks = tasks.filter(task => task.id !== id);
+
+    setTasks(filteredTasks)
   }
 
   return (
